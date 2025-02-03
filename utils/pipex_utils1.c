@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:18 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/03 15:14:33 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/03 15:43:06 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ void	exe_cmd(char *cmd, char **env)
 	char	*path;
 
 	s_cmd = ft_split(cmd, ' ');
-	path = check_cmd(s_cmd[0], env);
+	cmd = ft_strjoin("/", s_cmd[0]);
+	path = check_cmd(cmd, env);
+	free(cmd);
 	if (path == NULL)
+	{
+		ft_putstr_fd("no command found", 2);
 		exit(1);
-	ft_putstr_fd("HERE", 1);
+	}
 	if (execve(path, s_cmd, env) == -1)
 	{
 		ft_putstr_fd("command not found: ", 2);
