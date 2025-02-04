@@ -6,15 +6,30 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:14:18 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/04 13:17:47 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:52:31 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static int	is_separator(char ch, char c)
+static size_t	count_len(char *str, int i, char c)
 {
-	return (ch == c);
+	size_t	len;
+
+	len = 0;
+	if (str[i + len] && str[i + len] == '\'')
+	{
+		len++;
+		while (str[i + len] && str[i + len] != '\'')
+			len++;
+		len++;
+	}
+	else
+	{
+		while (str[i + len] && str[i + len] != c)
+			len++;
+	}
+	return (len);
 }
 
 static size_t	ft_count_words(char *str, char c)
@@ -26,13 +41,22 @@ static size_t	ft_count_words(char *str, char c)
 	count = 0;
 	while (str[i])
 	{
-		while (str[i] && is_separator(str[i], c))
+		while (str[i] && str[i] == c)
 			i++;
 		if (str[i] == '\0')
 			break ;
 		count++;
-		while (str[i] && !is_separator(str[i], c))
+		if (str[i] && str[i++] == '\'')
+		{
+			while (str[i] && str[i] != '\'')
+				i++;
 			i++;
+		}
+		else
+		{
+			while (str[i] && str[i] != c)
+				i++;
+		}
 	}
 	return (count);
 }
@@ -45,12 +69,10 @@ static	char	*ft_word_maker(char *str, size_t *index, char c)
 	size_t	j;
 
 	i = *index;
-	len = 0;
 	j = 0;
-	while (str[i] && is_separator(str[i], c))
+	while (str[i] && str[i] == c)
 		i++;
-	while (str[i + len] && !is_separator(str[i + len], c))
-		len++;
+	len = count_len(str, i, c);
 	word = malloc(sizeof(char) * (len + 1));
 	if (word == NULL)
 		return (NULL);

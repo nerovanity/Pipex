@@ -7,6 +7,7 @@ Y = $(shell tput setaf 3)
 SRCS=	pipex.c \
 		./utils/free_array.c \
 		./utils/ft_split.c \
+		./utils/ft_split_cmd.c \
 		./utils/libft1.c \
 		./utils/libft2.c \
 		./utils/get_path.c \
