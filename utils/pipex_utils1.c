@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:18 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/03 16:07:21 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:58:25 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*check_cmd(char *cmd, char **env)
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], cmd);
-		if (!access(tmp, F_OK | X_OK))
+		if (!access(tmp, X_OK))
 			return (free_array(paths), tmp);
 		free(tmp);
 		i++;
@@ -35,20 +35,20 @@ char	*check_cmd(char *cmd, char **env)
 	return (NULL);
 }
 
-// char	*get_cmd(char **full_cmd, char **env)
-// {
-// 	char	*cmd;
-// 	char	*flag;
-// 	char	*cmd_path;
-// 	char	*path;
+void	check_path(char *path, char **s_cmd)
+{
+	free(path);
+	free_array(s_cmd);
+	perror("command not found");
+	exit(1);
+}
 
-// 	cmd = full_cmd[0];
-// 	free_array(full_cmd);
-// 	cmd_path = ft_strjoin("/", cmd);
-// 	path = check_cmd(cmd_path, env);
-// 	free(cmd_path);
-// 	return (path);
-// }
+char	*check_local(char *cmd)
+{
+	if (!access(cmd, X_OK))
+		return (cmd);
+	return (NULL);
+}
 
 void	exe_cmd(char *cmd, char **env)
 {
@@ -56,25 +56,19 @@ void	exe_cmd(char *cmd, char **env)
 	char	*path;
 
 	s_cmd = ft_split(cmd, ' ');
-	cmd = ft_strjoin("/", s_cmd[0]);
-	path = check_cmd(cmd, env);
-	free(cmd);
+	if (ft_strnstr(s_cmd[0], "./", ft_strlen(s_cmd[0])))
+		path = check_local(s_cmd[0]);
+	else
+	{
+		cmd = ft_strjoin("/", s_cmd[0]);
+		path = check_cmd(cmd, env);
+		if (cmd)
+			free(cmd);
+	}
 	if (path == NULL)
-	{
-		ft_putstr_fd("no command found", 2);
-		free(path);
-		free_array(s_cmd);
-		exit(1);
-	}
+		check_path(path, s_cmd);
 	if (execve(path, s_cmd, env) == -1)
-	{
-		ft_putstr_fd("command not found: ", 2);
-		ft_putstr_fd(s_cmd[0], 2);
-		free(path);
-		free_array(s_cmd);
-		exit(1);
-	}
+		check_path(path, s_cmd);
 	free(path);
 	free_array(s_cmd);
 }
-

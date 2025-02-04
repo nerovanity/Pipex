@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:10:35 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/03 13:11:29 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:51:41 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,33 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_fill(s1, s2, str);
 	return (str);
+}
+
+int	ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	size_t	i;
+	size_t	k;
+	size_t	j;
+	size_t	needle_len;
+
+	needle_len = ft_strlen(needle);
+	if (needle_len == 0)
+		return (0);
+	if (len == 0)
+		return (0);
+	i = 0;
+	while (haystack[i] && i < len)
+	{
+		j = 0;
+		k = i;
+		while (haystack[k] == needle[j] && k < len && needle[j])
+		{
+			k++;
+			j++;
+		}
+		if (j == needle_len)
+			return (1);
+		i++;
+	}
+	return (0);
 }
