@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:10:35 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/05 11:35:39 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:41:54 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (0);
 }
+
 int	is_in(const char *s, char c)
 {
 	while (*s)
