@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:44:43 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/05 11:35:01 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/05 11:51:53 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	cmd_err(char *str)
 	exit(1);
 }
 
-void	frk_err(char *str, int *p_fd)
+void	close_err(char *str, int *p_fd)
 {
 	perror(str);
 	close(p_fd[0]);
@@ -32,20 +32,11 @@ void	child2(char **av, char **env, int *p_fd)
 
 	infile = open(av[1], O_RDONLY);
 	if (infile == -1)
-	{
-		perror("infile doesn't exist \n");
-		exit(1);
-	}
+		close_err("No such file or directory\n", p_fd);
 	if (dup2(infile, 0) == -1)
-	{
-		perror("dup failed");
-		exit(1);
-	}
+		close_err("dup failed :c\n", p_fd);
 	if (dup2(p_fd[1], 1) == -1)
-	{
-		perror("dup failed");
-		exit(1);
-	}
+		close_err("dup failed :c\n", p_fd);
 	close(p_fd[0]);
 	close(infile);
 	close(p_fd[1]);
@@ -58,20 +49,11 @@ void	child1(char **av, char **env, int *p_fd)
 
 	outfile = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile == -1)
-	{
-		perror("Can't open or create the outfile file \n");
-		exit(1);
-	}
+		close_err("Can't open or create the outfile file\n", p_fd);
 	if (dup2(outfile, 1) == -1)
-	{
-		perror("dup failed");
-		exit(1);
-	}
+		close_err("dup failed :c\n", p_fd);
 	if (dup2(p_fd[0], 0) == -1)
-	{
-		perror("dup failed");
-		exit(1);
-	}
+		close_err("dup failed :c\n", p_fd);
 	close(p_fd[1]);
 	close(outfile);
 	close(p_fd[0]);
@@ -91,14 +73,14 @@ int	main(int ac, char **av, char **env)
 	pid = fork();
 	pid2 = 0;
 	if (pid == -1)
-		frk_err("child 1 killed", p_fd);
+		close_err("child 1 killed", p_fd);
 	else if (!pid)
 		child1(av, env, p_fd);
 	else
 	{
 		pid2 = fork();
 		if (pid2 == -1)
-			frk_err("child 2 killed", p_fd);
+			close_err("child 2 killed", p_fd);
 		else if (!pid2)
 			child2(av, env, p_fd);
 	}
