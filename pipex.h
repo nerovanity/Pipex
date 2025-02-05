@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:42:07 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/04 15:51:53 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/05 11:24:16 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	exe_cmd(char *cmd, char **env);
 int		ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	**ft_split_cmd(char const *str, char c);
+int		is_in(const char *s, char c);
 
 #endif

@@ -6,15 +6,23 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:44:43 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/04 13:39:33 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/05 11:20:48 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	cmd_err(void)
+void	cmd_err(char *str)
 {
-	perror("./pipex file1 cmd1 cmd2 file2 \n");
+	perror(str);
+	exit(1);
+}
+
+void	frk_err(char *str, int *p_fd)
+{
+	perror(str);
+	close(p_fd[0]);
+	close(p_fd[1]);
 	exit(1);
 }
 
@@ -51,7 +59,7 @@ void	child1(char **av, char **env, int *p_fd)
 	outfile = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile == -1)
 	{
-		perror("Can't open pr create the outfile file \n");
+		perror("Can't open or create the outfile file \n");
 		exit(1);
 	}
 	if (dup2(outfile, 1) == -1)
@@ -77,19 +85,20 @@ int	main(int ac, char **av, char **env)
 	pid_t	pid2;
 
 	if (ac != 5)
-		cmd_err();
+		cmd_err("./pipex infile cmd1 cmd2 outfile");
 	if (pipe(p_fd) == -1)
 		exit(1);
 	pid = fork();
+	pid2 = 0;
 	if (pid == -1)
-		perror("childe 1 killed");
+		frk_err("child 1 killed", p_fd);
 	else if (!pid)
 		child1(av, env, p_fd);
 	else
 	{
 		pid2 = fork();
 		if (pid2 == -1)
-			perror("childe 2 killed");
+			frk_err("child 2 killed", p_fd);
 		else if (!pid2)
 			child2(av, env, p_fd);
 	}

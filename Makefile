@@ -1,4 +1,3 @@
-CC= cc
 FLAGS= -Wall -Wextra -Werror
 HEADER= pipex.h
 G = $(shell tput setaf 2)
@@ -19,11 +18,11 @@ all: $(NAME)
 	@echo $(G) all functions are done
 
 $(NAME): $(OBJECTS)
-	@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
+	@cc $(CFLAGS) $(OBJECTS) -o $(NAME)
 	
 %.o: %.c $(HEADER)
 	@echo $(Y) compailing file $< ... done
-	@$(CC) $(FLAGS) -c $< -o $@
+	@cc $(FLAGS) -c $< -o $@
 
 clean:
 	@echo $(R) cleaned
