@@ -6,17 +6,17 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:04:39 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/06 17:01:06 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:20:23 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./pipex_bonus.h"
 
-void	child2(char **av, char **env, int *p_fd)
+void	child2(int ac, char **av, char **env, int *p_fd)
 {
 	int	infile;
 
-	if (ft_strcmp(av[1], "here_doc") == 0)
+	if (ft_strcmp(av[1], "here_doc") == 0 && ac == 6)
 		here_doc(av[2]);
 	else
 	{
@@ -39,9 +39,7 @@ void	child1(int ac, char **av, char **env, int *p_fd)
 	int	outfile;
 
 	if (ft_strcmp(av[1], "here_doc") == 0)
-	{
 		outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
-	}
 	else
 		outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile == -1)
@@ -98,7 +96,7 @@ void	parent(int ac, char **av, char **env)
 		if (pid2 == -1)
 			close_err("child 2 killed", p_fd);
 		else if (!pid2)
-			child2(av, env, p_fd);
+			child2(ac, av, env, p_fd);
 	}
 	close(p_fd[0]);
 	close(p_fd[1]);

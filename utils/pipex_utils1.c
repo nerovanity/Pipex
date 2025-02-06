@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:18 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/06 14:05:19 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:06:21 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	exe_cmd(char *cmd, char **env)
 
 	if (!env)
 		exit(1);
-	if (!ft_strlen(cmd) || !cmd[0])
-		perror("invalid cmd");
 	s_cmd = ft_split_cmd(cmd, ' ');
 	if (ft_strnstr(s_cmd[0], "./", ft_strlen(s_cmd[0])))
 		path = check_local(s_cmd[0]);
