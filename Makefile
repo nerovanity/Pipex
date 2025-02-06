@@ -37,11 +37,11 @@ $(NAME): $(OBJECTS)
 	@cc $(CFLAGS) $(OBJECTS) -o $(NAME)
 	
 $(NAME_BON): $(BON_OBJ)
-	@cc $(CFLAGS) $(BON_OBJ) -o $(NAME)
+	@cc  $(CFLAGS) $(BON_OBJ) -o $(NAME)
 
 %.o: %.c $(HEADER)
 	@echo $(Y) compailing file $< ... done
-	@cc $(FLAGS) -c $< -o $@
+	@cc  $(FLAGS) -c $< -o $@
 
 clean:
 	@echo $(R) cleaned

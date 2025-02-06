@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:55:45 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/05 16:40:05 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:01:15 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,9 @@ char	**ft_split_cmd(char const *str, char c);
 int		is_in(const char *s, char c);
 void	here_doc(char *delimiter);
 void	close_err(char *str, int *p_fd);
+void	cmd_err(char *str);
+void	close_err(char *str, int *p_fd);
+void	middle(int ac, char **av, char**env, int *fds);
+void	inside_cmd(int ac, char **av, char **env, int *fds);
 
 #endif

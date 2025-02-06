@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 12:28:05 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/05 16:31:58 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:03:52 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,3 @@ void	*ft_calloc(size_t elementCount, size_t elementSize)
 	ft_bzero(res, elementSize * elementCount);
 	return (res);
 }
-
-
