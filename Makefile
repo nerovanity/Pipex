@@ -1,27 +1,27 @@
 FLAGS= -Wall -Wextra -Werror
-HEADER= pipex.h
+HEADER= Mandatory/pipex.h
 G = $(shell tput setaf 2)
 R = $(shell tput setaf 1)
 Y = $(shell tput setaf 3)
-SRCS=	pipex.c \
-		./utils/free_array.c \
-		./utils/ft_split.c \
-		./utils/ft_split_cmd.c \
-		./utils/libft1.c \
-		./utils/libft2.c \
-		./utils/get_path.c \
-		./utils/pipex_utils1.c
-BON= 	./pipex_bonus.c \
-		./pipex_bonus_utils.c \
-		./get_next_line/get_next_line.c \
-		./get_next_line/get_next_line_utils.c \
-		./utils/free_array.c \
-		./utils/ft_split.c \
-		./utils/ft_split_cmd.c \
-		./utils/libft1.c \
-		./utils/libft2.c \
-		./utils/get_path.c \
-		./utils/pipex_utils1.c
+SRCS=	./Mandatory/pipex.c \
+		./Mandatory/utils/free_array.c \
+		./Mandatory/utils/ft_split.c \
+		./Mandatory/utils/ft_split_cmd.c \
+		./Mandatory/utils/libft1.c \
+		./Mandatory/utils/libft2.c \
+		./Mandatory/utils/get_path.c \
+		./Mandatory/utils/pipex_utils1.c
+BON= 	./Bonus/pipex_bonus.c \
+		./Bonus/pipex_bonus_utils.c \
+		./Bonus/get_next_line/get_next_line.c \
+		./Bonus/get_next_line/get_next_line_utils.c \
+		./Bonus/utils/free_array.c \
+		./Bonus/utils/ft_split.c \
+		./Bonus/utils/ft_split_cmd.c \
+		./Bonus/utils/libft1.c \
+		./Bonus/utils/libft2.c \
+		./Bonus/utils/get_path.c \
+		./Bonus/utils/pipex_utils1.c
 OBJECTS= $(SRCS:.c=.o)
 BON_OBJ= $(BON:.c=.o)
 NAME=pipex
@@ -39,7 +39,11 @@ $(NAME): $(OBJECTS)
 $(NAME_BON): $(BON_OBJ)
 	@cc  $(CFLAGS) $(BON_OBJ) -o $(NAME)
 
-%.o: %.c $(HEADER)
+Mandatory/%.o: Mandatory/%.c $(HEADER)
+	@echo $(Y) compailing file $< ... done
+	@cc  $(FLAGS) -c $< -o $@
+
+Bonus/%.o: Bonus/%.c Bonus/pipex_bonus.h
 	@echo $(Y) compailing file $< ... done
 	@cc  $(FLAGS) -c $< -o $@
 
