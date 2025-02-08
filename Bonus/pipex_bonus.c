@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nero <nero@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:04:39 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/08 16:13:14 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/09 00:07:55 by nero             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	parent(int ac, char **av, char **env)
 
 int	main(int ac, char **av, char **env)
 {
+	char	*tmp;
+
 	if (ac < 5)
 		cmd_err("./pipex infile cmd1 cmd2 ... outfile");
 	if (ft_strcmp(av[1], "here_doc") == 0)
@@ -119,6 +121,13 @@ int	main(int ac, char **av, char **env)
 		if (ac < 6)
 			cmd_err("./pipex here_doc limiter cmd1 cmd2 outfile");
 	}
+	tmp = get_path(env);
+	if (!tmp)
+	{
+		ft_putstr_fd("Command not found\n", 2);
+		exit(1);
+	}
+	free(tmp);
 	parent(ac, av, env);
 	return (0);
 }

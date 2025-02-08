@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nero <nero@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:18 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/08 17:48:44 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/09 00:05:15 by nero             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*check_cmd(char *cmd, char **env)
 	i = 0;
 	path_env = get_path(env);
 	if (!path_env)
-		exit(1);
+		return (NULL);
 	paths = ft_split(path_env, ':');
 	free(path_env);
 	while (paths[i])
