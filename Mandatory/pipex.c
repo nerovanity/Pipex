@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:44:43 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/05 11:51:53 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/07 12:48:11 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	child2(char **av, char **env, int *p_fd)
 
 	infile = open(av[1], O_RDONLY);
 	if (infile == -1)
-		close_err("No such file or directory\n", p_fd);
+		close_err("infile ", p_fd);
 	if (dup2(infile, 0) == -1)
 		close_err("dup failed :c\n", p_fd);
 	if (dup2(p_fd[1], 1) == -1)
@@ -49,11 +49,11 @@ void	child1(char **av, char **env, int *p_fd)
 
 	outfile = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile == -1)
-		close_err("Can't open or create the outfile file\n", p_fd);
+		close_err("outfile ", p_fd);
 	if (dup2(outfile, 1) == -1)
-		close_err("dup failed :c\n", p_fd);
+		close_err("dup failed ", p_fd);
 	if (dup2(p_fd[0], 0) == -1)
-		close_err("dup failed :c\n", p_fd);
+		close_err("dup failed ", p_fd);
 	close(p_fd[1]);
 	close(outfile);
 	close(p_fd[0]);

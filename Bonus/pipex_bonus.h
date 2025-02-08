@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:55:45 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/07 10:57:20 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/08 15:26:51 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include "./get_next_line/get_next_line.h"

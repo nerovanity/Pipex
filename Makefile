@@ -1,3 +1,4 @@
+CC=cc
 FLAGS= -Wall -Wextra -Werror
 HEADER= Mandatory/pipex.h
 G = $(shell tput setaf 2)
@@ -34,18 +35,18 @@ bonus: $(NAME_BON)
 	@echo $(G) all functions are done
 
 $(NAME): $(OBJECTS)
-	@cc $(CFLAGS) $(OBJECTS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 	
 $(NAME_BON): $(BON_OBJ)
-	@cc  $(CFLAGS) $(BON_OBJ) -o $(NAME)
+	@$(CC)  $(CFLAGS) $(BON_OBJ) -o $(NAME)
 
 Mandatory/%.o: Mandatory/%.c $(HEADER)
 	@echo $(Y) compailing file $< ... done
-	@cc  $(FLAGS) -c $< -o $@
+	@$(CC)  $(FLAGS) -c $< -o $@
 
 Bonus/%.o: Bonus/%.c Bonus/pipex_bonus.h
 	@echo $(Y) compailing file $< ... done
-	@cc  $(FLAGS) -c $< -o $@
+	@$(CC)  $(FLAGS) -c $< -o $@
 
 clean:
 	@echo $(R) cleaned
@@ -56,3 +57,5 @@ fclean: clean
 	@rm -rf $(NAME)
 
 re: fclean all
+
+.PHONY: clean re all fclean bonus

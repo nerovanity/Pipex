@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:18 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/06 17:06:21 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/08 17:47:58 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	check_path(char *path, char **s_cmd)
 {
 	free(path);
 	free_array(s_cmd);
-	perror("command not found");
+	ft_putstr_fd("command not found\n", 2);
 	exit(1);
 }
 
 char	*check_local(char *cmd)
 {
 	if (!access(cmd, X_OK))
-		return (cmd);
+		return (ft_strdup(cmd));
 	return (NULL);
 }
 
@@ -56,6 +56,8 @@ void	exe_cmd(char *cmd, char **env)
 	char	*path;
 
 	if (!env)
+		exit(1);
+	if (!cmd[0] || !cmd)
 		exit(1);
 	s_cmd = ft_split_cmd(cmd, ' ');
 	if (ft_strnstr(s_cmd[0], "./", ft_strlen(s_cmd[0])))

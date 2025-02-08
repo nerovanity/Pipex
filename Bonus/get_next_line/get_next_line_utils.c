@@ -6,46 +6,53 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 12:28:05 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/06 17:03:52 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/08 13:46:41 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *string, int searchedChar )
+char	*ft_strchr(const char *s, int c)
 {
-	char	*str;
-
-	str = (char *)string;
-	while (*str != searchedChar && *str != 0)
-		str++;
-	if (*str == searchedChar)
-		return (str);
-	else
-		return (NULL);
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*str;
-	size_t	i;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
+	ft_memset(s, 0, n);
 }
 
-void	*ft_calloc(size_t elementCount, size_t elementSize)
+void	*ft_memset(void *b, int c, size_t n)
 {
-	char	*res;
+	size_t			i;
+	unsigned char	*s;
 
-	res = malloc(elementSize * elementCount);
-	if (!res)
+	s = (unsigned char *)b;
+	i = 0;
+	while (i < n)
+		s[i++] = (unsigned char)c;
+	return (b);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*adr;
+	size_t	len;
+
+	len = count * size;
+	if (count != 0 && (len / count) != size)
 		return (NULL);
-	ft_bzero(res, elementSize * elementCount);
-	return (res);
+	adr = malloc(len);
+	if (!adr)
+		return (NULL);
+	ft_bzero(adr, len);
+	return (adr);
 }

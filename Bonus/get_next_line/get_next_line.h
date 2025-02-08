@@ -6,7 +6,7 @@
 /*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 11:34:25 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/06 17:03:31 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/08 16:24:50 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@
 # endif
 
 # include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
 # include <unistd.h>
 # include "../pipex_bonus.h"
 
 char	*get_next_line(int fd);
-char	*ft_strchr(const char *string, int searchedChar );
+char	*ft_strchr(const char *s, int c);
 void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
+void	*ft_memset(void *b, int c, size_t n);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif
