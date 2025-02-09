@@ -6,7 +6,7 @@
 /*   By: nero <nero@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:18 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/09 00:05:15 by nero             ###   ########.fr       */
+/*   Updated: 2025/02/09 03:03:05 by nero             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	exe_cmd(char *cmd, char **env)
 	char	**s_cmd;
 	char	*path;
 
-	if (!env)
-		exit(1);
 	if (!cmd[0] || !cmd)
-		exit(1);
+		cmd_err("command not found\n");
 	s_cmd = ft_split_cmd(cmd, ' ');
 	if (ft_strnstr(s_cmd[0], "./", ft_strlen(s_cmd[0])))
 		path = check_local(s_cmd[0]);

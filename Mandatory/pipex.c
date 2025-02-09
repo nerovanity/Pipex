@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nero <nero@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:44:43 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/07 12:48:11 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/09 03:14:18 by nero             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cmd_err(char *str)
 {
-	perror(str);
+	ft_putstr_fd(str, 2);
 	exit(1);
 }
 
@@ -66,8 +66,10 @@ int	main(int ac, char **av, char **env)
 	pid_t	pid;
 	pid_t	pid2;
 
+	if (!*env)
+		cmd_err("env!\n");
 	if (ac != 5)
-		cmd_err("./pipex infile cmd1 cmd2 outfile");
+		cmd_err("./pipex infile cmd1 cmd2 outfile\n");
 	if (pipe(p_fd) == -1)
 		exit(1);
 	pid = fork();
@@ -84,7 +86,5 @@ int	main(int ac, char **av, char **env)
 		else if (!pid2)
 			child2(av, env, p_fd);
 	}
-	close(p_fd[0]);
-	close(p_fd[1]);
-	return (waitpid(pid, NULL, 0), waitpid(pid2, NULL, 0), 0);
+	return (close(p_fd[1]),close(p_fd[0]),waitpid(pid, NULL, 0), waitpid(pid2, NULL, 0), 0);
 }

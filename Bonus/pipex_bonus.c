@@ -6,7 +6,7 @@
 /*   By: nero <nero@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:04:39 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/09 00:07:55 by nero             ###   ########.fr       */
+/*   Updated: 2025/02/09 03:12:01 by nero             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ int	main(int ac, char **av, char **env)
 {
 	char	*tmp;
 
+	if (!*env)
+		cmd_err("env!\n");
 	if (ac < 5)
-		cmd_err("./pipex infile cmd1 cmd2 ... outfile");
+		cmd_err("./pipex infile cmd1 cmd2 ... outfile\n");
 	if (ft_strcmp(av[1], "here_doc") == 0)
 	{
 		if (ac < 6)

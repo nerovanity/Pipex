@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nero <nero@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:56:32 by ihamani           #+#    #+#             */
-/*   Updated: 2025/02/08 16:08:05 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/02/09 02:00:16 by nero             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,5 @@ void	inside_cmd(int ac, char **av, char **env, int *fds)
 	{
 		close(tmp_fd[0]);
 		close(tmp_fd[1]);
-		waitpid(pid, NULL, 0);
 	}
 }
